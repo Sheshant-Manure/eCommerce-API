@@ -8,5 +8,6 @@ Router.get('/', (req, res)=>{
 
 // API request to add product to the database
 Router.post('/products/create', productsController.createProduct);
+Router.get('/products', productsController.listProducts);
 
 module.exports = Router;

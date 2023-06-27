@@ -20,3 +20,8 @@ module.exports.createProduct = async (req, res) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+module.exports.listProducts = async (req, res) => {
+    const products_list = await Product.find({});
+    res.send({data: products_list});
+}
