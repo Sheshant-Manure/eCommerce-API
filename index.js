@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const app = express();
 
+app.use(bodyParser.json());
 
 // Using Mongoose ODM to connect with MongoDB 
 main().catch(err => console.log(err));
@@ -17,9 +19,7 @@ db.once("open", function () {
   console.log("Connected successfully to MongoDB");
 });
 
-app.get('/', (req, res)=>{
-    res.send('Welcome to eCommerce API');
-});
+app.use('/', require('./Routes/index'));
 
 //Setting the express server at defined port
 const port = 8000;
