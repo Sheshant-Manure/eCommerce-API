@@ -14,7 +14,7 @@ module.exports.createProduct = async (req, res) => {
       quantity,
     });
 
-    return res.send({data: { productid, name, quantity }});
+    return res.json({ data: {product: { productid, name, quantity }}});
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Internal server error' });
@@ -22,6 +22,22 @@ module.exports.createProduct = async (req, res) => {
 };
 
 module.exports.listProducts = async (req, res) => {
-    const products_list = await Product.find({});
-    res.send({data: products_list});
+  try {
+    const products = await Product.find();
+    return res.json({ data: { products: products}});
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+module.exports.deleteProduct = async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    await Product.findOneAndDelete({ productid: productId });
+    return res.json({data : { message: 'Product deleted successfully' }});
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
 }

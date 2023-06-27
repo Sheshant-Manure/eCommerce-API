@@ -8,6 +8,11 @@ Router.get('/', (req, res)=>{
 
 // API request to add product to the database
 Router.post('/products/create', productsController.createProduct);
+
+// API request to list all the products
 Router.get('/products', productsController.listProducts);
+
+// API request to delete a product using productid
+Router.delete('/products/:productId', productsController.deleteProduct);
 
 module.exports = Router;
