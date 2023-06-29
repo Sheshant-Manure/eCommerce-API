@@ -41,3 +41,15 @@ module.exports.deleteProduct = async (req, res) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 }
+
+module.exports.updateProductQty = async (req, res) => {
+  const filter = { productid: req.params.id };
+  let qty = parseInt(req.params.qty);
+  const prod = await Product.find({productid: req.params.id});
+  qty += prod[0].quantity; // Here the product quantity is incremented or decremented based on the sign + or - number
+  update = { quantity: qty};
+  const updatedProd = await Product.findOneAndUpdate(filter, update, {
+    new: true
+  });
+  res.json(updatedProd);
+}

@@ -15,4 +15,7 @@ Router.get('/products', productsController.listProducts);
 // API request to delete a product using productid
 Router.delete('/products/:productId', productsController.deleteProduct);
 
+// API request to update quantity of a product
+Router.post('/products/:id/update_quantity/:qty', productsController.updateProductQty);
+
 module.exports = Router;
